@@ -1,0 +1,49 @@
+{
+        "mappings": {
+                "properties": {
+                        "id": {
+                                "type": "long"
+                        },
+                        "phone": {
+                                "type": "keyword"
+                        },
+                        "username": {
+                                "type": "text",
+                                "analyzer": "ik_smart"
+                        },
+                        "password": {
+                                "type": "keyword"
+                        },
+                        "salt": {
+                                "type": "keyword"
+                        },
+                        "image": {
+                                "type": "keyword"
+                        },
+                        "signature": {
+                                "type": "keyword"
+                        },
+                        "status": {
+                                "type": "byte"
+                        },
+                        "create_time": {
+                                "type": "date"
+                        },
+                        "update_time": {
+                                "type": "date"
+                        },
+                        "attention": {
+                                "type": "long"
+                        },
+                        "followers": {
+                                "type": "long"
+                        },
+                        "works": {
+                                "type": "long"
+                        },
+                        "likes": {
+                                "type": "long"
+                        }
+                }
+        }
+}

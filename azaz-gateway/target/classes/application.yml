@@ -1,0 +1,41 @@
+spring:
+  cloud:
+    gateway:
+      globalcors: # 全局的跨域处理
+        corsConfigurations:
+          '[/**]':
+            allowedOriginPatterns: "*" # 允许哪些网站的跨域请求
+            allowedMethods: # 允许的跨域ajax的请求方式
+              - "GET"
+              - "POST"
+              - "DELETE"
+              - "PUT"
+              - "OPTIONS"
+            allowedHeaders: "*" # 允许在请求中携带的头信息
+            allowCredentials: true # 是否允许携带cookie
+            maxAge: 3600000 # 这次跨域检测的有效期
+        add-to-simple-url-handler-mapping: true
+      routes: # 网关路由配置
+        - id: azaz-service-user
+          uri: lb://azaz-service-user
+          predicates:
+            - Path=/azaz/user/**
+        - id: azaz-service-video
+          uri: lb://azaz-service-video
+          predicates:
+            - Path=/azaz/video/**
+        - id: azaz-service-interact
+          uri: lb://azaz-service-interact
+          predicates:
+            - Path=/azaz/interact/**
+        - id: azaz-service-search
+          uri: lb://azaz-service-search
+          predicates:
+            - Path=/azaz/search/**
+logging:
+  level:
+    com:
+      sky:
+        mapper: debug
+        service: info
+        controller: info

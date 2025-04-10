@@ -1,0 +1,11 @@
+feign:
+  client:
+    config:
+      default: # 这里用default就是全局配置，如果是写服务名称，则是针对某个微服务的配置
+        loggerLevel: BASIC #  日志级别
+        connectTimeout: 600000 # 连接超时时间
+        readTimeout: 600000 # 读取超时时间
+  httpclient:
+    enabled: true # 开启feign对HttpClient的支持
+    max-connections: 200 # 最大的连接数
+    max-connections-per-route: 50 # 每个路径的最大连接数

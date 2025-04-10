@@ -1,0 +1,20 @@
+server:
+  port: 8083   # 服务端口
+spring:
+  application:
+    name: azaz-service-interact # 服务名称
+  profiles:
+    active: dev # 服务环境
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.200.130:8848 # nacos地址
+      config:
+        file-extension: yaml # 配置文件 azaz-service-interact-dev.yaml
+feign:
+  client:
+    config:
+      default: # 这里用default就是全局配置，如果是写服务名称，则是针对某个微服务的配置
+        loggerLevel: BASIC #  日志级别
+        connectTimeout: 600000 # 连接超时时间
+        readTimeout: 600000 # 读取超时时间

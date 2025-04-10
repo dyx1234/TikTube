@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.azaz.mapper.PrivateMessageMapper">
+    <select id="selectByUserIdAndFriendId" resultType="com.azaz.interact.pojo.PrivateMessage">
+        select * from tb_private_message
+                 where ((sender_id = #{userId} and receiver_id = #{friendId})
+                    or (sender_id = #{friendId} and receiver_id = #{userId}))
+                    and id &lt; #{lastMessageId}
+                 order by id desc
+    </select>
+</mapper>

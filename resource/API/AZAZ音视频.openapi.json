@@ -1,0 +1,3677 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "AZAZ音视频",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "用户模块"
+    },
+    {
+      "name": "视频模块"
+    },
+    {
+      "name": "社交模块"
+    },
+    {
+      "name": "搜索模块"
+    }
+  ],
+  "paths": {
+    "/azaz/user/login/register": {
+      "post": {
+        "summary": "用户注册",
+        "x-apifox-folder": "用户模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "用户注册，提交用户名与密码。",
+        "tags": [
+          "用户模块"
+        ],
+        "parameters": [
+          {
+            "name": "phone",
+            "in": "query",
+            "description": "手机号，唯一",
+            "required": true,
+            "example": "13455556668",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "密码，长度不短于6，不超过20",
+            "required": true,
+            "example": "123456",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-119605328-run"
+      }
+    },
+    "/azaz/user/personal": {
+      "get": {
+        "summary": "用户个人信息查询",
+        "x-apifox-folder": "用户模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "用户个人信息查询，包括昵称头像和个签。",
+        "tags": [
+          "用户模块"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "要查询的用户，查自己可以用0或者自己的id",
+            "required": false,
+            "example": "6",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "f2ez61mh4veynw8vztmk3cemzn4m60mr",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "状态码"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "提示信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "username": {
+                          "type": "string",
+                          "description": "用户昵称"
+                        },
+                        "image": {
+                          "type": "string",
+                          "description": "头像地址"
+                        },
+                        "signature": {
+                          "type": "string",
+                          "description": "个性签名"
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "用户id"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "username",
+                        "image",
+                        "signature",
+                        "id"
+                      ],
+                      "required": [
+                        "username",
+                        "image",
+                        "signature",
+                        "id"
+                      ],
+                      "title": "用户信息",
+                      "description": "错误是为null",
+                      "x-apifox-ignore-properties": [],
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "required": [
+                    "data",
+                    "code",
+                    "message"
+                  ],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-119786467-run"
+      },
+      "put": {
+        "summary": "用户个人信息修改",
+        "x-apifox-folder": "用户模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "用户个人信息修改，成功之后返回，然后重新发起一次用户信息查询即可获得最新信息",
+        "tags": [
+          "用户模块"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "用户名，不超过20个字",
+            "required": true,
+            "example": "丁正",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "image",
+            "in": "query",
+            "description": "用户头像地址",
+            "required": true,
+            "example": "https://shigc-md-file.oss-cn-beijing.aliyuncs.com/10_2.jpg",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "signature",
+            "in": "query",
+            "description": "个性签名，不超过200个字",
+            "required": true,
+            "example": "我有鸿运齐天蛊",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "jnws1wwy81i8ehreotd0pnzukf1am6p9",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "响应码，2正常"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "null",
+                      "title": "此处无数据"
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-120057914-run"
+      }
+    },
+    "/azaz/video/upload": {
+      "post": {
+        "summary": "上传文件",
+        "x-apifox-folder": "视频模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "上传文件(视频文件和视频封面文件都可用此接口)，返回文件url",
+        "tags": [
+          "视频模块"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "a7rs283hnj4qns8y8qksv3rqc8impokq",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "example": [],
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "file"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "host": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {},
+                      "x-apifox-orders": [
+                        "01HDXWP49G46X1R12NKGP2YRY1"
+                      ],
+                      "required": [
+                        "01HDXWP49G46X1R12NKGP2YRY1"
+                      ],
+                      "description": "URL",
+                      "x-apifox-ignore-properties": []
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "host",
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "required": [
+                    "message",
+                    "code"
+                  ],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "成功示例",
+                    "value": {
+                      "message": "上传成功",
+                      "code": "200",
+                      "host": "",
+                      "data": ""
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-119799912-run"
+      }
+    },
+    "/azaz/user/login": {
+      "post": {
+        "summary": "用户登录",
+        "x-apifox-folder": "用户模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "用户登录，提交手机号和密码",
+        "tags": [
+          "用户模块"
+        ],
+        "parameters": [
+          {
+            "name": "phone",
+            "in": "query",
+            "description": "手机号，唯一",
+            "required": true,
+            "example": "13476577717",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "密码，长度不短于6，不超过20",
+            "required": true,
+            "example": "123456",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {},
+                  "x-apifox-orders": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2操作成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "token": {
+                          "type": "string",
+                          "title": "登录凭证"
+                        },
+                        "userId": {
+                          "type": "string",
+                          "title": "用户id"
+                        }
+                      },
+                      "title": "数据",
+                      "description": "成功情况下为用户token",
+                      "x-apifox-orders": [
+                        "token",
+                        "userId"
+                      ],
+                      "required": [
+                        "token",
+                        "userId"
+                      ],
+                      "x-apifox-ignore-properties": [],
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-119992087-run"
+      }
+    },
+    "/azaz/user/homePage": {
+      "get": {
+        "summary": "用户个人主页查询",
+        "x-apifox-folder": "用户模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "查询用户的主页信息。",
+        "tags": [
+          "用户模块"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "被查询主页的用户，查自己可以用0或者自己的id",
+            "required": false,
+            "example": "0",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录凭证",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "description": "响应码"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "用户id"
+                        },
+                        "username": {
+                          "type": "string",
+                          "description": "用户名"
+                        },
+                        "image": {
+                          "type": "string",
+                          "description": "用户头像"
+                        },
+                        "signature": {
+                          "type": "string",
+                          "description": "个性签名"
+                        },
+                        "fansNum": {
+                          "type": "integer",
+                          "description": "粉丝数"
+                        },
+                        "followNum": {
+                          "type": "integer",
+                          "description": "关注人数"
+                        },
+                        "workNum": {
+                          "type": "integer",
+                          "description": "作品数"
+                        },
+                        "likedNum": {
+                          "type": "integer",
+                          "description": "获赞数"
+                        },
+                        "isFollow": {
+                          "type": "boolean",
+                          "description": "是否关注"
+                        }
+                      },
+                      "x-apifox-orders": [
+                        "id",
+                        "username",
+                        "image",
+                        "signature",
+                        "fansNum",
+                        "followNum",
+                        "workNum",
+                        "likedNum",
+                        "isFollow"
+                      ],
+                      "required": [
+                        "username",
+                        "image",
+                        "signature",
+                        "fansNum",
+                        "followNum",
+                        "isFollow",
+                        "likedNum",
+                        "id",
+                        "workNum"
+                      ],
+                      "description": "查询出错为null",
+                      "x-apifox-ignore-properties": [],
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-120069821-run"
+      }
+    },
+    "/azaz/video/showCollectList": {
+      "get": {
+        "summary": "收藏列表查询",
+        "x-apifox-folder": "视频模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "查询用户的收藏列表，收藏列表只能自己查看",
+        "tags": [
+          "视频模块"
+        ],
+        "parameters": [
+          {
+            "name": "currentPage",
+            "in": "query",
+            "description": "当前页数，每页固定18个",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "用户id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录凭证",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "videoList": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/video"
+                          }
+                        },
+                        "total": {
+                          "type": "integer",
+                          "title": "总记录数"
+                        },
+                        "currentPage": {
+                          "type": "integer",
+                          "title": "当前记录数"
+                        }
+                      },
+                      "title": "通用返回对象",
+                      "description": "列表可为空",
+                      "x-apifox-orders": [
+                        "videoList",
+                        "total",
+                        "currentPage"
+                      ],
+                      "required": [
+                        "videoList",
+                        "total",
+                        "currentPage"
+                      ],
+                      "x-apifox-ignore-properties": [],
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-refs": {},
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-120095939-run"
+      }
+    },
+    "/azaz/video/getPublishedVideos": {
+      "get": {
+        "summary": "查询发布列表",
+        "x-apifox-folder": "视频模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "查询用户发布的视频列表",
+        "tags": [
+          "视频模块"
+        ],
+        "parameters": [
+          {
+            "name": "currentPage",
+            "in": "query",
+            "description": "当前页数，每页固定18个",
+            "required": true,
+            "example": "0",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "要查询的用户",
+            "required": true,
+            "example": "30",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "utvedogfgis8pm96duqgv9p8tx0b5zvw",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "videoList": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "x-apifox-refs": {
+                              "01HE2DN0YDCKZVSBGXZHZNQGB7": {
+                                "$ref": "#/components/schemas/video"
+                              }
+                            },
+                            "properties": {
+                              "videoId": {
+                                "type": "string",
+                                "title": "视频id"
+                              },
+                              "authorId": {
+                                "type": "string",
+                                "title": "作者id"
+                              },
+                              "coverUrl": {
+                                "type": "string",
+                                "title": "视频封面地址"
+                              },
+                              "videoUrl": {
+                                "type": "string",
+                                "title": "视频地址"
+                              },
+                              "title": {
+                                "type": "string",
+                                "title": "视频标题"
+                              }
+                            },
+                            "required": [
+                              "01HE2DN0YD9YWN2J89ZWMN1X0G",
+                              "videoId",
+                              "authorId",
+                              "coverUrl",
+                              "videoUrl",
+                              "title"
+                            ],
+                            "x-apifox-orders": [
+                              "01HE2DN0YDCKZVSBGXZHZNQGB7",
+                              "01HE2DN0YD9YWN2J89ZWMN1X0G"
+                            ],
+                            "x-apifox-ignore-properties": [
+                              "videoId",
+                              "authorId",
+                              "coverUrl",
+                              "videoUrl",
+                              "title"
+                            ]
+                          },
+                          "title": "视频列表"
+                        },
+                        "total": {
+                          "type": "integer",
+                          "title": "总记录数"
+                        }
+                      },
+                      "title": "通用返回对象",
+                      "description": "列表可为空",
+                      "x-apifox-orders": [
+                        "videoList",
+                        "total"
+                      ],
+                      "required": [
+                        "videoList",
+                        "total"
+                      ],
+                      "x-apifox-ignore-properties": [],
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-refs": {},
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-120111475-run"
+      }
+    },
+    "/azaz/interact/follow/list": {
+      "get": {
+        "summary": "关注列表查询",
+        "x-apifox-folder": "社交模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "查询用户关注列表，只能查询自己的关注列表",
+        "tags": [
+          "社交模块"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "rbh2559gtd7wrecknhxqmiedlwumjuhq",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/userInfo"
+                      },
+                      "title": "通用返回对象",
+                      "description": "可以为空",
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-refs": {},
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-120114872-run"
+      }
+    },
+    "/azaz/video/getVideos": {
+      "get": {
+        "summary": "视频流获取",
+        "x-apifox-folder": "视频模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "获取视频流，按照时间顺序",
+        "tags": [
+          "视频模块"
+        ],
+        "parameters": [
+          {
+            "name": "lastVideoId",
+            "in": "query",
+            "description": "上一次最后一条视频的Id，第一次则为0",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "section",
+            "in": "query",
+            "description": "用户点击左侧不同板块时生效，只推送对应分类，默认为0，不分类。",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录凭证",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "host": {
+                      "type": "string",
+                      "title": "主机地址",
+                      "description": "一般为空",
+                      "nullable": true
+                    },
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "200正常，其他错误"
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "integer",
+                          "title": "本次返回的总记录数"
+                        },
+                        "videoList": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "videoId": {
+                                "type": "string",
+                                "title": "视频id"
+                              },
+                              "coverUrl": {
+                                "type": "string",
+                                "title": "视频封面地址"
+                              },
+                              "videoUrl": {
+                                "type": "string",
+                                "title": "视频地址"
+                              },
+                              "title": {
+                                "type": "string",
+                                "title": "视频标题"
+                              },
+                              "likeNum": {
+                                "type": "integer",
+                                "title": "视频点赞数"
+                              },
+                              "isLiked": {
+                                "type": "boolean",
+                                "title": "是否点赞"
+                              },
+                              "commentNum": {
+                                "type": "integer",
+                                "title": "视频评论数"
+                              },
+                              "collectNum": {
+                                "type": "integer",
+                                "title": "视频收藏数"
+                              },
+                              "isCollected": {
+                                "type": "boolean",
+                                "title": "是否收藏"
+                              },
+                              "authorId": {
+                                "type": "string",
+                                "title": "作者id"
+                              },
+                              "username": {
+                                "type": "string",
+                                "title": "作者昵称"
+                              },
+                              "image": {
+                                "type": "string",
+                                "title": "作者头像地址"
+                              },
+                              "createTime": {
+                                "type": "string",
+                                "title": "视频发布时间",
+                                "description": "yyyy-MM-DD hh/mm/ss 的格式"
+                              }
+                            },
+                            "x-apifox-refs": {},
+                            "x-apifox-orders": [
+                              "videoId",
+                              "coverUrl",
+                              "videoUrl",
+                              "title",
+                              "likeNum",
+                              "isLiked",
+                              "commentNum",
+                              "collectNum",
+                              "isCollected",
+                              "authorId",
+                              "username",
+                              "image",
+                              "createTime"
+                            ],
+                            "required": [
+                              "videoId",
+                              "coverUrl",
+                              "videoUrl",
+                              "createTime",
+                              "username",
+                              "image",
+                              "authorId",
+                              "title",
+                              "likeNum",
+                              "isLiked",
+                              "commentNum",
+                              "collectNum",
+                              "isCollected"
+                            ],
+                            "x-apifox-ignore-properties": []
+                          },
+                          "title": "视频列表",
+                          "nullable": true
+                        },
+                        "lastVideoId": {
+                          "type": "string",
+                          "title": "最后一条视频的id",
+                          "description": "游标，下次请求携带"
+                        }
+                      },
+                      "title": "通用返回对象",
+                      "description": "可以为空",
+                      "x-apifox-orders": [
+                        "total",
+                        "videoList",
+                        "lastVideoId"
+                      ],
+                      "required": [
+                        "total",
+                        "videoList",
+                        "lastVideoId"
+                      ],
+                      "x-apifox-ignore-properties": [],
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "host",
+                    "code",
+                    "errorMessage",
+                    "data"
+                  ],
+                  "required": [
+                    "code",
+                    "errorMessage"
+                  ],
+                  "x-apifox-refs": {},
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-120125290-run"
+      }
+    },
+    "/azaz/video/publish": {
+      "post": {
+        "summary": "发布视频",
+        "x-apifox-folder": "视频模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "发布视频，需要让用户选择对应的板块。视频封面可以选，不选默认封面",
+        "tags": [
+          "视频模块"
+        ],
+        "parameters": [
+          {
+            "name": "title",
+            "in": "query",
+            "description": "视频标题，不超过50个字",
+            "required": true,
+            "example": "IT崩盘啦，土木才是未来的铁饭碗！",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "videoUrl",
+            "in": "query",
+            "description": "视频地址",
+            "required": true,
+            "example": "http://s349n62ri.bkt.clouddn.com/f8ff07fe-5e64-4c26-9f48-be091d7bbcfd.mp4",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "coverUrl",
+            "in": "query",
+            "description": "视频封面地址",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "section",
+            "in": "query",
+            "description": "视频分类，让用户选择提交到具体的板块，具体参考功能设计文档",
+            "required": true,
+            "example": "6",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "a7rs283hnj4qns8y8qksv3rqc8impokq",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {},
+                  "x-apifox-orders": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2操作成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {},
+                      "title": "通用返回对象，这里为空",
+                      "description": "没有数据是为Null",
+                      "x-apifox-orders": [],
+                      "x-apifox-ignore-properties": [],
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-120428841-run"
+      }
+    },
+    "/azaz/user/image/upload": {
+      "post": {
+        "summary": "上传头像",
+        "x-apifox-folder": "用户模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "提交头像得到url",
+        "tags": [
+          "用户模块"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "a7rs283hnj4qns8y8qksv3rqc8impokq",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "imageFile": {
+                    "type": "string",
+                    "description": "用户头像，文件不超过5Mb（前端校验），后缀.jpg .png .jpeg",
+                    "example": [],
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2操作成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "string",
+                      "title": "头像url",
+                      "description": "没有数据是为Null",
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01HDWHT0XHP3A16E093H3M1FHE"
+                  ],
+                  "x-apifox-refs": {
+                    "01HDWHT0XHP3A16E093H3M1FHE": {
+                      "$ref": "#/components/schemas/Response"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-120428951-run"
+      }
+    },
+    "/azaz/interact/message/list": {
+      "get": {
+        "summary": "查询与其他人的私信",
+        "x-apifox-folder": "社交模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "查询与其他人的私信列表，一次最多查询三十条数据。其中可能有视频id，需要特殊处理。",
+        "tags": [
+          "社交模块"
+        ],
+        "parameters": [
+          {
+            "name": "friendId",
+            "in": "query",
+            "description": "私信对方的id",
+            "required": true,
+            "example": "9",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lastMessageId",
+            "in": "query",
+            "description": "查询该消息(即上一次返回的lastMessageId)之前的最多三十条消息，第一次为该值为0，查询最新消息也为0",
+            "required": true,
+            "example": "0",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "ntw9fi2ypo8zke36so9gdwy34ekl9z8v",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2操作成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "senderId": {
+                                "type": "string",
+                                "title": "发送者的id"
+                              },
+                              "messageContent": {
+                                "type": "string",
+                                "title": "私信内容",
+                                "description": "如果是分享的视频，这里是视频id"
+                              },
+                              "messageId": {
+                                "type": "string",
+                                "title": "私信id"
+                              },
+                              "status": {
+                                "type": "integer",
+                                "title": "私信分类0－普通私信 1－视频分享2－系统消息"
+                              }
+                            },
+                            "x-apifox-refs": {},
+                            "x-apifox-orders": [
+                              "senderId",
+                              "messageContent",
+                              "messageId",
+                              "status"
+                            ],
+                            "required": [
+                              "messageContent",
+                              "messageId",
+                              "senderId",
+                              "status"
+                            ],
+                            "x-apifox-ignore-properties": []
+                          },
+                          "title": "消息列表，越新的消息越靠前"
+                        },
+                        "total": {
+                          "type": "integer",
+                          "title": "本次消息总数"
+                        },
+                        "lastMessageId": {
+                          "type": "string",
+                          "title": "最久远的消息的id"
+                        }
+                      },
+                      "title": "通用返回对象",
+                      "description": "没有数据是为Null",
+                      "x-apifox-orders": [
+                        "messages",
+                        "total",
+                        "lastMessageId"
+                      ],
+                      "required": [
+                        "messages",
+                        "total",
+                        "lastMessageId"
+                      ],
+                      "x-apifox-ignore-properties": [],
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-refs": {},
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-120454429-run"
+      }
+    },
+    "/azaz/interact/message/send": {
+      "post": {
+        "summary": "发送私信",
+        "x-apifox-folder": "社交模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "发完消息，隔几十毫秒重新发送一次查询请求即可查询到最新的消息。未互关朋友只能发送不超过三条私信。",
+        "tags": [
+          "社交模块"
+        ],
+        "parameters": [
+          {
+            "name": "receiverId",
+            "in": "query",
+            "description": "私信对象的id",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "content",
+            "in": "query",
+            "description": "私信。不超过200字",
+            "required": true,
+            "example": "你好，我是刻晴",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "类型，0-普通私信 ",
+            "required": true,
+            "example": "0",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "9ltymj9qs1osjhlf4kjrqfu1g7ib5b1n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2操作成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "null",
+                      "title": "通用返回对象",
+                      "description": "没有数据是为Null"
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-refs": {},
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-120458541-run"
+      }
+    },
+    "/azaz/interact/follow/friends": {
+      "get": {
+        "summary": "查询所有互关好友",
+        "x-apifox-folder": "社交模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "给互关用户分享视频，用户分享时选择要分享的互关用户，此时调用此接口",
+        "tags": [
+          "社交模块"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "rbh2559gtd7wrecknhxqmiedlwumjuhq",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2操作成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/userInfo"
+                      },
+                      "title": "通用返回对象",
+                      "description": "没有数据是为Null",
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01HE2DYT79FFH4G5M6PX988YFR"
+                  ],
+                  "x-apifox-refs": {
+                    "01HE2DYT79FFH4G5M6PX988YFR": {
+                      "$ref": "#/components/schemas/Response"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-120611918-run"
+      }
+    },
+    "/azaz/interact/follow/ifFollow": {
+      "get": {
+        "summary": "查询是否关注",
+        "x-apifox-folder": "社交模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "查询第一个用户是否关注第二个",
+        "tags": [
+          "社交模块"
+        ],
+        "parameters": [
+          {
+            "name": "firstUser",
+            "in": "query",
+            "description": "第一个用户",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "secondUser",
+            "in": "query",
+            "description": "第二个用户",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "a7rs283hnj4qns8y8qksv3rqc8impokq",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2操作成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "boolean",
+                      "title": "通用返回对象",
+                      "description": "是否互关",
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01HE2A1XQ9TCCD7YFFQ6Y1R3AP"
+                  ],
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-refs": {
+                    "01HE2A1XQ9TCCD7YFFQ6Y1R3AP": {
+                      "$ref": "#/components/schemas/Response"
+                    }
+                  },
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-120611963-run"
+      }
+    },
+    "/azaz/video/info": {
+      "get": {
+        "summary": "查询视频简略信息",
+        "x-apifox-folder": "视频模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "查询视频简略信息，用于朋友分享的展示以及点赞列表收藏列表等信息展示",
+        "tags": [
+          "视频模块"
+        ],
+        "parameters": [
+          {
+            "name": "videoId",
+            "in": "query",
+            "description": "要查询视频id",
+            "required": false,
+            "example": "16",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "utvedogfgis8pm96duqgv9p8tx0b5zvw",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2操作成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "title": "通用返回对象",
+                      "description": "视频信息",
+                      "anyOf": [
+                        {
+                          "$ref": "#/components/schemas/video"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01HE0F7KD678VTSHEEXYFY66DM"
+                  ],
+                  "x-apifox-refs": {
+                    "01HE0F7KD678VTSHEEXYFY66DM": {
+                      "$ref": "#/components/schemas/Response"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-120797292-run"
+      }
+    },
+    "/azaz/video/detailInfo": {
+      "get": {
+        "summary": "查询视频详细信息",
+        "x-apifox-folder": "视频模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "查询视频详细信息，包括各种数据",
+        "tags": [
+          "视频模块"
+        ],
+        "parameters": [
+          {
+            "name": "videoId",
+            "in": "query",
+            "description": "要查询的视频id",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录凭证",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2操作成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "title": "通用返回对象",
+                      "description": "没有数据是为Null",
+                      "type": "object",
+                      "x-apifox-refs": {},
+                      "x-apifox-orders": [
+                        "videoId",
+                        "coverUrl",
+                        "videoUrl",
+                        "title",
+                        "likes",
+                        "isLiked",
+                        "comments",
+                        "collects",
+                        "isCollected",
+                        "authorId",
+                        "username",
+                        "image",
+                        "createTime"
+                      ],
+                      "properties": {
+                        "videoId": {
+                          "type": "string",
+                          "title": "视频id"
+                        },
+                        "coverUrl": {
+                          "type": "string",
+                          "title": "视频封面地址"
+                        },
+                        "videoUrl": {
+                          "type": "string",
+                          "title": "视频地址"
+                        },
+                        "title": {
+                          "type": "string",
+                          "title": "视频标题"
+                        },
+                        "likes": {
+                          "type": "integer",
+                          "title": "视频点赞数"
+                        },
+                        "isLiked": {
+                          "type": "boolean",
+                          "title": "是否点赞"
+                        },
+                        "comments": {
+                          "type": "integer",
+                          "title": "视频评论数"
+                        },
+                        "collects": {
+                          "type": "integer",
+                          "title": "视频收藏数"
+                        },
+                        "isCollected": {
+                          "type": "boolean",
+                          "title": "是否收藏"
+                        },
+                        "authorId": {
+                          "type": "string",
+                          "title": "作者id"
+                        },
+                        "username": {
+                          "type": "string",
+                          "title": "作者昵称"
+                        },
+                        "image": {
+                          "type": "string",
+                          "title": "作者头像地址"
+                        },
+                        "createTime": {
+                          "type": "string",
+                          "title": "视频发布时间",
+                          "description": "yyyy-MM-DD hh/mm/ss 的格式"
+                        }
+                      },
+                      "required": [
+                        "videoId",
+                        "coverUrl",
+                        "videoUrl",
+                        "createTime",
+                        "username",
+                        "image",
+                        "authorId",
+                        "title",
+                        "likes",
+                        "isLiked",
+                        "comments",
+                        "collects",
+                        "isCollected"
+                      ],
+                      "x-apifox-ignore-properties": [],
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-refs": {},
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-120797319-run"
+      }
+    },
+    "/azaz/video/doLike": {
+      "post": {
+        "summary": "视频点赞和取消点赞",
+        "x-apifox-folder": "视频模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "点赞视频或者取消点赞",
+        "tags": [
+          "视频模块"
+        ],
+        "parameters": [
+          {
+            "name": "videoId",
+            "in": "query",
+            "description": "点赞视频id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "1为点赞，0为取消点赞",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "authorId",
+            "in": "query",
+            "description": "视频作者Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "k01b6ewxj90883sh6ti4elf6nh91we9y",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {},
+                      "x-apifox-orders": [],
+                      "x-apifox-ignore-properties": []
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "integer"
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "data",
+                    "message",
+                    "code"
+                  ],
+                  "required": [
+                    "message",
+                    "code"
+                  ],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-120827684-run"
+      }
+    },
+    "/azaz/video/userLikes": {
+      "get": {
+        "summary": "用户获赞总数查询",
+        "x-apifox-folder": "视频模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "查询用户获赞总数，用于首页展示",
+        "tags": [
+          "视频模块"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "要查询的用户id",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录凭证",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2操作成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "integer",
+                      "title": "获赞总数",
+                      "description": "没有数据是为Null",
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01HE2EMDY75ZFN82HA2FCQ5B9K"
+                  ],
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-refs": {
+                    "01HE2EMDY75ZFN82HA2FCQ5B9K": {
+                      "$ref": "#/components/schemas/Response"
+                    }
+                  },
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-121102600-run"
+      }
+    },
+    "/azaz/interact/follow/do": {
+      "post": {
+        "summary": "关注用户与取消关注",
+        "x-apifox-folder": "社交模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "在用户首页或者关注列表中可以选择关注用户或者取关",
+        "tags": [
+          "社交模块"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "操作对象",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "操作类型 1-关注 0-取消关注",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "请求头",
+            "required": true,
+            "example": "a4v05m4ato5yxyisuzyd31ebht88m0zv",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2操作成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "null",
+                      "title": "通用返回对象",
+                      "description": "没有数据"
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01HE2M16YR3B4FE418G532S6R7"
+                  ],
+                  "x-apifox-refs": {
+                    "01HE2M16YR3B4FE418G532S6R7": {
+                      "$ref": "#/components/schemas/Response"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-121135874-run"
+      }
+    },
+    "/azaz/interact/message/chatList": {
+      "get": {
+        "summary": "查询私信用户列表",
+        "x-apifox-folder": "社交模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "查询私信列表，在进入私信列表时出现。每个元素包含发送最后一条消息的用户信息以及最新一条消息内容，UI参考QQ。\n逻辑是保留最近聊天的朋友。",
+        "tags": [
+          "社交模块"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "enai7m4zbvdo7jrl4y4emxianqk0hk77",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2操作成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "integer",
+                          "description": "列表总数"
+                        },
+                        "chatList": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "x-apifox-refs": {
+                              "01HE4XY8CZ6BJ9H63J6RK5PCKT": {
+                                "$ref": "#/components/schemas/userInfo"
+                              }
+                            },
+                            "x-apifox-orders": [
+                              "01HE4XY8CZ6BJ9H63J6RK5PCKT",
+                              "latestMessage"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "对方用户id"
+                              },
+                              "username": {
+                                "type": "string",
+                                "description": "用户昵称"
+                              },
+                              "image": {
+                                "type": "string",
+                                "description": "用户头像"
+                              },
+                              "signature": {
+                                "type": "string",
+                                "description": "个性签名"
+                              },
+                              "latestMessage": {
+                                "type": "string",
+                                "description": "最新一条消息"
+                              }
+                            },
+                            "required": [
+                              "latestMessage",
+                              "id",
+                              "username",
+                              "image",
+                              "signature"
+                            ],
+                            "x-apifox-ignore-properties": [
+                              "id",
+                              "username",
+                              "image",
+                              "signature"
+                            ]
+                          },
+                          "description": "私信列表"
+                        }
+                      },
+                      "title": "通用返回对象",
+                      "description": "没有数据是为Null",
+                      "x-apifox-orders": [
+                        "total",
+                        "chatList"
+                      ],
+                      "required": [
+                        "total",
+                        "chatList"
+                      ],
+                      "x-apifox-ignore-properties": [],
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01HE32NEEZMPPPV8PEK6MBW3ZY"
+                  ],
+                  "x-apifox-refs": {
+                    "01HE32NEEZMPPPV8PEK6MBW3ZY": {
+                      "$ref": "#/components/schemas/Response"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-121169468-run"
+      }
+    },
+    "/azaz/interact/follow/num": {
+      "get": {
+        "summary": "查询关注数",
+        "x-apifox-folder": "社交模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "社交模块"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "用户id",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录凭证",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2操作成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "integer",
+                      "title": "通用返回对象",
+                      "description": "关注人数",
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01HE5CMT24KP1E2NTN8G1AGSR7"
+                  ],
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-refs": {
+                    "01HE5CMT24KP1E2NTN8G1AGSR7": {
+                      "$ref": "#/components/schemas/Response"
+                    }
+                  },
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-121487116-run"
+      }
+    },
+    "/azaz/interact/follow/fansNum": {
+      "get": {
+        "summary": "查询粉丝数",
+        "x-apifox-folder": "社交模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "社交模块"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "用户id",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录凭证",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2操作成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "integer",
+                      "title": "通用返回对象",
+                      "description": "粉丝数",
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01HE5CNFV8AFH2JSQCQ950JC6X"
+                  ],
+                  "x-apifox-refs": {
+                    "01HE5CNFV8AFH2JSQCQ950JC6X": {
+                      "$ref": "#/components/schemas/Response"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-121487161-run"
+      }
+    },
+    "/azaz/search/user": {
+      "get": {
+        "summary": "搜索用户",
+        "x-apifox-folder": "搜索模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "根据关键词搜索用户",
+        "tags": [
+          "搜索模块"
+        ],
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "搜索关键词，大于等于两个字符",
+            "required": true,
+            "example": "红鸢",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "当前页码，从1开始",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页大小",
+            "required": true,
+            "example": "10",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "eq583mbw7e46s5z2ixe8qc91qxrqotrw",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2操作成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "integer",
+                          "description": "总个数"
+                        },
+                        "userList": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/userInfo"
+                          }
+                        }
+                      },
+                      "title": "通用返回对象",
+                      "description": "没有数据是为Null",
+                      "x-apifox-orders": [
+                        "total",
+                        "userList"
+                      ],
+                      "required": [
+                        "total",
+                        "userList"
+                      ],
+                      "x-apifox-ignore-properties": [],
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01HEADTRZYT01J7S81ZPK399MW"
+                  ],
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-refs": {
+                    "01HEADTRZYT01J7S81ZPK399MW": {
+                      "$ref": "#/components/schemas/Response"
+                    }
+                  },
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-122155542-run"
+      }
+    },
+    "/azaz/search/video": {
+      "get": {
+        "summary": "搜索视频",
+        "x-apifox-folder": "搜索模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "根据关键词搜索视频",
+        "tags": [
+          "搜索模块"
+        ],
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "搜索关键词，大于等于两个字符",
+            "required": true,
+            "example": "世界",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "当前页码，从1开始",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页大小",
+            "required": true,
+            "example": "500",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "2whzjhcv3xyw0tevwuescpx0k582rwgg",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2操作成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "integer",
+                          "description": "总数"
+                        },
+                        "videoList": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "x-apifox-refs": {},
+                            "x-apifox-orders": [
+                              "videoId",
+                              "coverUrl",
+                              "videoUrl",
+                              "title",
+                              "likes",
+                              "isLiked",
+                              "comments",
+                              "collects",
+                              "isCollected",
+                              "authorId",
+                              "username",
+                              "image",
+                              "createTime"
+                            ],
+                            "properties": {
+                              "videoId": {
+                                "type": "string",
+                                "title": "视频id"
+                              },
+                              "coverUrl": {
+                                "type": "string",
+                                "title": "视频封面地址"
+                              },
+                              "videoUrl": {
+                                "type": "string",
+                                "title": "视频地址"
+                              },
+                              "title": {
+                                "type": "string",
+                                "title": "视频标题"
+                              },
+                              "likes": {
+                                "type": "integer",
+                                "title": "视频点赞数"
+                              },
+                              "isLiked": {
+                                "type": "boolean",
+                                "title": "是否点赞"
+                              },
+                              "comments": {
+                                "type": "integer",
+                                "title": "视频评论数"
+                              },
+                              "collects": {
+                                "type": "integer",
+                                "title": "视频收藏数"
+                              },
+                              "isCollected": {
+                                "type": "boolean",
+                                "title": "是否收藏"
+                              },
+                              "authorId": {
+                                "type": "string",
+                                "title": "作者id"
+                              },
+                              "username": {
+                                "type": "string",
+                                "title": "作者昵称"
+                              },
+                              "image": {
+                                "type": "string",
+                                "title": "作者头像地址"
+                              },
+                              "createTime": {
+                                "type": "string",
+                                "title": "视频发布时间",
+                                "description": "yyyy-MM-DD hh/mm/ss 的格式"
+                              }
+                            },
+                            "required": [
+                              "videoId",
+                              "coverUrl",
+                              "videoUrl",
+                              "createTime",
+                              "username",
+                              "image",
+                              "authorId",
+                              "title",
+                              "likes",
+                              "isLiked",
+                              "comments",
+                              "collects",
+                              "isCollected"
+                            ],
+                            "x-apifox-ignore-properties": []
+                          }
+                        }
+                      },
+                      "title": "通用返回对象",
+                      "description": "没有数据是为Null",
+                      "x-apifox-orders": [
+                        "total",
+                        "videoList"
+                      ],
+                      "required": [
+                        "total",
+                        "videoList"
+                      ],
+                      "x-apifox-ignore-properties": [],
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-refs": {},
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-122155549-run"
+      }
+    },
+    "/azaz/video/doComment": {
+      "post": {
+        "summary": "评论视频",
+        "x-apifox-folder": "视频模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "对视频或者评论进行评论",
+        "tags": [
+          "视频模块"
+        ],
+        "parameters": [
+          {
+            "name": "videoId",
+            "in": "query",
+            "description": "视频id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "content",
+            "in": "query",
+            "description": "评论内容",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "parentId",
+            "in": "query",
+            "description": "父评论的id，要是无父评论，填0",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录凭证",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-122195106-run"
+      }
+    },
+    "/azaz/video/getCommentList": {
+      "get": {
+        "summary": "获取评论列表",
+        "x-apifox-folder": "视频模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "获取评论列表",
+        "tags": [
+          "视频模块"
+        ],
+        "parameters": [
+          {
+            "name": "videoId",
+            "in": "query",
+            "description": "视频id",
+            "required": false,
+            "example": "35",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "commentId",
+            "in": "query",
+            "description": "想要查看的评论回复的评论id，一级评论填0",
+            "required": false,
+            "example": "0",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "cmwwzmvajly3wo9w2kkrvjqlbsd5yfl2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "videoId": {
+                            "type": "string"
+                          },
+                          "userId": {
+                            "type": "string"
+                          },
+                          "userName": {
+                            "type": "string"
+                          },
+                          "image": {
+                            "type": "string",
+                            "description": "用户头像"
+                          },
+                          "content": {
+                            "type": "string",
+                            "description": "评论内容"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "createTime": {
+                            "type": "string"
+                          },
+                          "updataTime": {
+                            "type": "string"
+                          }
+                        },
+                        "x-apifox-orders": [
+                          "id",
+                          "videoId",
+                          "userId",
+                          "userName",
+                          "image",
+                          "content",
+                          "status",
+                          "createTime",
+                          "updataTime"
+                        ],
+                        "required": [
+                          "id",
+                          "videoId",
+                          "userId",
+                          "userName",
+                          "image",
+                          "content",
+                          "status",
+                          "createTime",
+                          "updataTime"
+                        ],
+                        "x-apifox-ignore-properties": []
+                      }
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "required": [
+                    "code"
+                  ],
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-122195490-run"
+      }
+    },
+    "/azaz/interact/follow/ifFollowEachOther": {
+      "get": {
+        "summary": "查询是否互相关注",
+        "x-apifox-folder": "社交模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "查询两个用户是否互相关注",
+        "tags": [
+          "社交模块"
+        ],
+        "parameters": [
+          {
+            "name": "firstUser",
+            "in": "query",
+            "description": "第一个用户的id",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "secondUser",
+            "in": "query",
+            "description": "第二个用户的id",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2操作成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "boolean",
+                      "title": "通用返回对象",
+                      "description": "两个用户是否互相关注",
+                      "nullable": true
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01HED9SQCD5WTNT0H8TT5BYJH5"
+                  ],
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-refs": {
+                    "01HED9SQCD5WTNT0H8TT5BYJH5": {
+                      "$ref": "#/components/schemas/Response"
+                    }
+                  },
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-122247336-run"
+      }
+    },
+    "/azaz/user/login/logout": {
+      "delete": {
+        "summary": "退出登录",
+        "x-apifox-folder": "用户模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "退出登录，消除token，没有返回值",
+        "tags": [
+          "用户模块"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录凭证",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {},
+                  "x-apifox-orders": [],
+                  "properties": {},
+                  "x-apifox-ignore-properties": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-122748617-run"
+      }
+    },
+    "/azaz/user/personal/ackPassword": {
+      "get": {
+        "summary": "确认密码",
+        "x-apifox-folder": "用户模块",
+        "x-apifox-status": "testing",
+        "deprecated": false,
+        "description": "确认密码，在需要确认权限的地方进行操作",
+        "tags": [
+          "用户模块"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "用户id",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "密码",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "登录凭证",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-apifox-refs": {
+                    "01HEKXGMSPFRNVA9DXJ6M731NQ": {
+                      "$ref": "#/components/schemas/Response"
+                    }
+                  },
+                  "x-apifox-orders": [
+                    "01HEKXGMSPFRNVA9DXJ6M731NQ"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "integer",
+                      "title": "返回码",
+                      "description": "2操作成功，其他错误"
+                    },
+                    "message": {
+                      "type": "string",
+                      "title": "错误信息",
+                      "description": "返回错误的情况向用户展示该错误信息",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "boolean",
+                      "title": "通用返回对象",
+                      "description": "密码是否正确",
+                      "nullable": true
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message",
+                    "data"
+                  ],
+                  "x-apifox-ignore-properties": [
+                    "code",
+                    "message",
+                    "data"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://apifox.com/web/project/3472416/apis/api-122753804-run"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "privateMessage": {
+        "type": "object",
+        "properties": {
+          "messageContent": {
+            "type": "string",
+            "title": "私信内容"
+          },
+          "messageId": {
+            "type": "string",
+            "title": "私信id"
+          },
+          "status": {
+            "type": "integer",
+            "title": "私信类型，0-普通私信 1-视频分享 2-系统消息"
+          },
+          "senderId": {
+            "type": "string",
+            "title": "发送者的id"
+          }
+        },
+        "title": "私信",
+        "x-apifox-orders": [
+          "messageContent",
+          "messageId",
+          "status",
+          "senderId"
+        ],
+        "required": [
+          "messageContent",
+          "messageId",
+          "status",
+          "senderId"
+        ],
+        "x-apifox-refs": {},
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": ""
+      },
+      "videoDetailInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "视频id"
+          },
+          "coverUrl": {
+            "type": "string",
+            "title": "视频封面地址"
+          },
+          "videoUrl": {
+            "type": "string",
+            "title": "视频地址"
+          },
+          "title": {
+            "type": "string",
+            "title": "视频标题"
+          },
+          "likes": {
+            "type": "integer",
+            "title": "视频点赞数"
+          },
+          "isLiked": {
+            "type": "boolean",
+            "title": "是否点赞"
+          },
+          "comments": {
+            "type": "integer",
+            "title": "视频评论数"
+          },
+          "collects": {
+            "type": "integer",
+            "title": "视频收藏数"
+          },
+          "isCollected": {
+            "type": "boolean",
+            "title": "是否收藏"
+          },
+          "authorId": {
+            "type": "string",
+            "title": "作者id"
+          },
+          "username": {
+            "type": "string",
+            "title": "作者昵称"
+          },
+          "image": {
+            "type": "string",
+            "title": "作者头像地址"
+          },
+          "createTime": {
+            "type": "string",
+            "title": "视频发布时间",
+            "description": "yyyy-MM-DD hh/mm/ss 的格式"
+          }
+        },
+        "title": "视频详细信息",
+        "x-apifox-orders": [
+          "id",
+          "coverUrl",
+          "videoUrl",
+          "title",
+          "likes",
+          "isLiked",
+          "comments",
+          "collects",
+          "isCollected",
+          "authorId",
+          "username",
+          "image",
+          "createTime"
+        ],
+        "required": [
+          "id",
+          "coverUrl",
+          "videoUrl",
+          "createTime",
+          "username",
+          "image",
+          "authorId",
+          "title",
+          "likes",
+          "isLiked",
+          "comments",
+          "collects",
+          "isCollected"
+        ],
+        "x-apifox-refs": {},
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": ""
+      },
+      "userInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "用户id"
+          },
+          "username": {
+            "type": "string",
+            "description": "用户昵称"
+          },
+          "image": {
+            "type": "string",
+            "description": "用户头像"
+          },
+          "signature": {
+            "type": "string",
+            "description": "个性签名"
+          }
+        },
+        "title": "用户基本信息",
+        "x-apifox-orders": [
+          "id",
+          "username",
+          "image",
+          "signature"
+        ],
+        "required": [
+          "username",
+          "image",
+          "id",
+          "signature"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": ""
+      },
+      "video": {
+        "type": "object",
+        "properties": {
+          "videoId": {
+            "type": "string",
+            "title": "视频id"
+          },
+          "authorId": {
+            "type": "string",
+            "title": "作者id"
+          },
+          "coverUrl": {
+            "type": "string",
+            "title": "视频封面地址"
+          },
+          "videoUrl": {
+            "type": "string",
+            "title": "视频地址"
+          },
+          "title": {
+            "type": "string",
+            "title": "视频标题"
+          }
+        },
+        "title": "视频基本信息",
+        "x-apifox-orders": [
+          "videoId",
+          "authorId",
+          "coverUrl",
+          "videoUrl",
+          "title"
+        ],
+        "required": [
+          "videoId",
+          "coverUrl",
+          "videoUrl",
+          "title",
+          "authorId"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": ""
+      },
+      "Response": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "title": "返回码",
+            "description": "2操作成功，其他错误"
+          },
+          "message": {
+            "type": "string",
+            "title": "错误信息",
+            "description": "返回错误的情况向用户展示该错误信息",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "properties": {},
+            "title": "通用返回对象",
+            "description": "没有数据是为Null",
+            "x-apifox-orders": [],
+            "x-apifox-ignore-properties": [],
+            "nullable": true
+          }
+        },
+        "title": "通用返回对象",
+        "x-apifox-orders": [
+          "code",
+          "message",
+          "data"
+        ],
+        "required": [
+          "code",
+          "message",
+          "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": ""
+      },
+      "homePage": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "用户名"
+          },
+          "image": {
+            "type": "string",
+            "description": "用户头像"
+          },
+          "signature": {
+            "type": "string",
+            "description": "个性签名"
+          },
+          "follewerNum": {
+            "type": "integer",
+            "description": "粉丝数"
+          },
+          "follewNum": {
+            "type": "integer",
+            "description": "关注人数"
+          },
+          "workNum": {
+            "type": "integer",
+            "description": "作品数"
+          },
+          "likedNum": {
+            "type": "integer",
+            "description": "被点赞数"
+          },
+          "collectNum": {
+            "type": "integer",
+            "description": "收藏数"
+          },
+          "isFollewed": {
+            "type": "boolean",
+            "description": "是否关注"
+          }
+        },
+        "x-apifox-orders": [
+          "username",
+          "image",
+          "signature",
+          "follewerNum",
+          "follewNum",
+          "workNum",
+          "likedNum",
+          "collectNum",
+          "isFollewed"
+        ],
+        "required": [
+          "username",
+          "image",
+          "signature",
+          "follewerNum",
+          "follewNum",
+          "workNum",
+          "likedNum",
+          "collectNum",
+          "isFollewed"
+        ],
+        "description": "查询出错为null",
+        "title": "用户主页",
+        "x-apifox-ignore-properties": [],
+        "nullable": true,
+        "x-apifox-folder": ""
+      }
+    }
+  },
+  "servers": []
+}

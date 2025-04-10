@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DatabaseToolSources">
+    <data-source name="124.221.176.164" uuid="e6707d96-cbb8-46df-9114-cbd6cb2bdd38" type="MYSQL">
+      <base-info connect-type="DB_DEFAULT" product="MySQL" version="8.0.27" jdbc-name="MySQL Connector/J" jdbc-version="mysql-connector-java-8.0.25 (Revision: 08be9e9b4cba6aa115f9b27b215887af40b159e0)" />
+      <user-name>root</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema">
+            <name qname="azaz" />
+          </node>
+        </introspection-scope>
+      </schema-mapping>
+      <url>jdbc:mysql://124.221.176.164:3306/?useSSL=false&amp;serverTimezone=Asia/Hong_Kong?useSSL=false&amp;serverTimezone=Asia/Hong_Kong?useSSL=false&amp;serverTimezone=Asia/Hong_Kong?useSSL=false&amp;serverTimezone=Asia/Hong_Kong?useSSL=false&amp;serverTimezone=Asia/Hong_Kong?useSSL=false&amp;serverTimezone=Asia/Hong_Kong?useSSL=false&amp;serverTimezone=Asia/Hong_Kong?useSSL=false&amp;serverTimezone=Asia/Hong_Kong?useSSL=false&amp;serverTimezone=Asia/Hong_Kong?useSSL=false&amp;serverTimezone=Asia/Hong_Kong?useSSL=false&amp;serverTimezone=Asia/Hong_Kong</url>
+      <remarks />
+      <vm-options />
+      <driver-info id="mysql8" />
+      <ssh-properties enabled="false" />
+      <jdbc-additional-properties>
+        <property name="characterSetResults" value="utf8" />
+        <property name="zeroDateTimeBehavior" value="CONVERT_TO_NULL" />
+        <property name="characterEncoding" value="utf8" />
+        <property name="useTimezone" value="true" />
+        <property name="yearIsDateType" value="false" />
+      </jdbc-additional-properties>
+      <ssl-config enabled="false">
+        <uuid />
+        <caFile />
+        <clientCertificateFile />
+        <clientKeyFile />
+        <sslMode>REQUIRE</sslMode>
+      </ssl-config>
+    </data-source>
+  </component>
+</project>
