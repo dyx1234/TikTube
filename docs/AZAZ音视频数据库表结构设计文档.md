@@ -16,7 +16,7 @@
 
 ### 2. 数据库表一览图
 
-![数据库表一览图](E:\Code\Java\JavaWeb\AZAZ\resource\imgs\数据库表一览图.png)
+![数据库表一览图](/resource/imgs/数据库表一览图.png)
 
 ### tb_user 用户信息表
 
@@ -158,8 +158,8 @@ CREATE TABLE `tb_collect` (
 | created_time | timestamp       | 非空，默认当前时间 | 点赞时间       |
 
 ```SQL
-DROP TABLE IF EXISTS `tb_follow `;
-CREATE TABLE `tb_follow ` (
+DROP TABLE IF EXISTS `tb_follow`;
+CREATE TABLE `tb_follow` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `follow_id` int unsigned NOT NULL COMMENT '被关注的用户',
   `user_id` int unsigned NOT NULL COMMENT '操作关注用户', 
